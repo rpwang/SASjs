@@ -6,15 +6,15 @@ AUTHOR: Rui-Peng Wang
 Description: Sequence Analysis Suite on node.js
 
 
-//Comments:
-Started as a free time project using Node.js. Hopefully will continue to for a long time!
+COMMENTS:
+Started as a free time project using Node.js. Hopefully will continue for a long time!
 Added: fasta2tab.js
-//9 october 2014
+DATE: 9 october 2014
 Added: fasta_summary.js 
 
 
 
-//How to use SASjs
+HOW TO:
 1) Install node.js - recommend to use the recent version 
 
 2) Install npm - recommend to use the recent version 
