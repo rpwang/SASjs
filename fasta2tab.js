@@ -9,7 +9,6 @@ var appversion = "0.1 - created by Rui-Peng Wang.";
 cli.parse({
 	log:	['l', 'Enable logging'],
 	fasta:	['f', 'Fasta file from PATH','path'],
-	tab:	['t', 'Write to FILE rather than the console', 'path'],
 	version:['v', 'Display version number']
 });
 
@@ -17,7 +16,7 @@ cli.main(function (args, options){
 	if (options.version){
 		cli.info('Version:'+appversion);
 	}
-	else if (options.fasta && options.tab){
+	else if (options.fasta){
 		var instream = fs.createReadStream(options.fasta);
 		var outstream = new stream;
 		var readlineStream = readline.createInterface(instream,outstream);
@@ -27,12 +26,12 @@ cli.main(function (args, options){
 		readlineStream.on('line',function(line){
 				if(line.charAt(0) == '>'){
 					if (str_seq.length == 1 ){
-						fs.writeFile(options.fasta,line+"\t");
+						process.stdout.write(line+"\t");
 						str_seq = "";
 					}
 					else if(str_seq.length != 0){
-						fs.appendFile(options.fasta,str_seq+"\n");
-						fs.appendFile(options.fasta,line+"\t");
+						process.stdout.write(str_seq+"\n");
+						process.stdout.write(line+"\t");
 						str_seq = "";
 					}
 				}
@@ -41,7 +40,7 @@ cli.main(function (args, options){
 				}
 		});
 		readlineStream.on('close',function(){
-			fs.appendFile(options.fasta,str_seq+"\n");
+			process.stdout.write(str_seq+"\n");
 			cli.ok("Process finished!");
 		});
 	}
